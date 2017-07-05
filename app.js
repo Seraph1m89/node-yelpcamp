@@ -38,7 +38,7 @@ app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.user = req.user;
     next();
-
+});
 
 app.use("/camps", campRoutes);
 app.use("/camps/:id/comments", commentRoutes);
