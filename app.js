@@ -16,15 +16,18 @@ const commentRoutes = require("./routes/comments"),
       indexRoutes = require("./routes/index");
       
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/yelp_camp")//.then(() => seedDB());
-
+//mongoose.connect("mongodb://localhost/yelp_camp")//.then(() => seedDB());
+mongoose.connect("mongodb://denis:d10n1$89@ds137441.mlab.com:37441/yelp_camp");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.use(expressSession({
     secret: "This is my test project",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 60 * 60 * 1000
+    }
 }));
 app.use(methodOverride("_method"));
 
