@@ -1,0 +1,63 @@
+<% include ../partials/header%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">YealpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 1</li>
+                <li class="list-group-item">Info 1</li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= item.image %>">
+                <div class="caption-full">
+                    <h4 class="pull-right">$<%= item.price %>/night</h4>
+                    <h4><a><%= item.name %></a></h4>
+                    <p><%= item.description %></p>
+                    <p>
+                        <em>Submitted By <%= item.author.username %></em>
+                    </p>
+                    <form action="/camps/<%= item._id %>?_method=DELETE" method="POST">
+                        <% if(item.author && isOwner(item.author.id)) { %>
+                        <div class="btn-toolbar">
+                            <a class="btn btn-sm btn-primary" href="/camps/<%= item._id %>/edit">Edit Camp</a>
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </div>
+                        <% } %>
+                    </form>
+                </div>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/camps/<%=item._id%>/comments/new">Add New Comment</a>
+                </div>
+                <hr>
+                <% item.comments.forEach(comment => { %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author.username %></strong><span class="pull-right">10 days ago</span>
+                            <p>
+                                <%= comment.text %>
+                            </p>
+                            <% if(comment.author && isOwner(comment.author.id)) { %>
+                                <form method="POST" 
+                                action="/camps/<%=item._id%>/comments/<%= comment._id%>?_method=DELETE">
+                                    <div class="btn-toolbar">
+                                        <a class="btn btn-xs btn-warning" 
+                                        href="/camps/<%= item._id %>/comments/<%= comment._id%>/edit">Edit</a>
+                                        <button class="btn btn-xs btn-danger">Delete</button>
+                                    </div>
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<% include ../partials/footer%>

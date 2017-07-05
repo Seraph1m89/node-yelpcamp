@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;">Leave New Comment for <%=camp.name%></h1>
+        <div style="width: 30%; margin: 40px auto; ">
+            <form method="POST" action="/camps/<%=camp._id%>/comments">
+                <div class="form-group">
+                    <textarea class="form-control" type="text" placeholder="Comment" name="comment[text]"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/">Go back</a>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
