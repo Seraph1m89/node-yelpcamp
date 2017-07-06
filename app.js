@@ -16,8 +16,11 @@ const commentRoutes = require("./routes/comments"),
       indexRoutes = require("./routes/index");
       
 mongoose.Promise = global.Promise;
-//mongoose.connect("mongodb://localhost/yelp_camp")//.then(() => seedDB());
-mongoose.connect("mongodb://denis:d10n1$89@ds137441.mlab.com:37441/yelp_camp");
+mongoose.connect(process.env.DATABASEURL)//.then(() => seedDB());
+console.log(process.env.DATABASEURL);
+console.log(process.env.IP);
+console.log(process.env.PORT);
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
