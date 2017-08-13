@@ -17,9 +17,6 @@ const commentRoutes = require("./routes/comments"),
       
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASEURL)//.then(() => seedDB());
-console.log(process.env.DATABASEURL);
-console.log(process.env.IP);
-console.log(process.env.PORT);
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
